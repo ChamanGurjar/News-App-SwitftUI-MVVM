@@ -9,19 +9,15 @@
 import Foundation
 import Combine
 
-class ArticleListViewModel: BindableObject {
-    let didChange = PassthroughSubject<ArticleListViewModel, Never>()
+class ArticleListViewModel: ObservableObject {
+    
+    let willChange = PassthroughSubject<ArticleListViewModel, Never>()
     
     init() {
         fetchTopHeadlines()
     }
     
-    var articles = [ArticleViewModel]() {
-        didSet {
-            didChange.send(self)
-        }
-    }
-    
+    @Published var articles = [ArticleViewModel]()
     
     /// This method will fetch latest news.
     private func fetchTopHeadlines() {

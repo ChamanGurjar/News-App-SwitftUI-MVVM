@@ -9,8 +9,22 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @ObservedObject var model = ArticleListViewModel()
+    
     var body: some View {
-        Text("Hello, World!")
+        List(model.articles) { article in
+            
+            VStack(alignment: .leading) {
+                
+                Text(article.title)
+                    .lineLimit(nil)
+                
+                Text(article.description)
+                    .foregroundColor(.secondary)
+                    .lineLimit(nil)
+            }
+        }
     }
 }
 
